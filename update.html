@@ -1,0 +1,111 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+  <!-- Material Design fonts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+</head>
+<style>
+#updateform{
+  margin-left: 20px;
+}
+#addkeyword{
+  position: absolute;
+  margin-top: 620px;
+  margin-left: 270px;
+}
+</style>
+<body>
+  <main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+      <div class="page-content">
+        <!--  TAB 1 ADD ............................ -->
+        <main class="mdl-layout__content" id="updateform">
+      <div class="mdl-card mdl-shadow--6dp">
+        <form action="" method="POST">
+  <div class="mdl-card__supporting-text">
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="isbn" value="${ISBN}" >
+    <label class="mdl-textfield__label" for="isbn">ISBN</label>
+  </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="author"value="${author}">
+        <label class="mdl-textfield__label" for="email">Author</label>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="title" value="${title}">
+      <label class="mdl-textfield__label" for="password">Title</label>
+    </div>
+
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text"  id="callnumber" value="${callNumber}">
+    <label class="mdl-textfield__label" for="id">Call Number</label>
+
+  </div>
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="publisher" value="${publisher}">
+    <label class="mdl-textfield__label" for="email">Publisher</label>
+  </div>
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input class="mdl-textfield__input" type="text" id="year" pattern="^[0-9]{4}$" value="${yearOfPublication}">
+  <label class="mdl-textfield__label" for="year">Year of Publication</label>
+  <span class="mdl-textfield__error">Enter a valid Year</span>
+</div>
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="Location" value="${location}">
+    <label class="mdl-textfield__label" for="email">Location</label>
+  </div>
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="copies" value="${numberOfCopies}">
+    <label class="mdl-textfield__label" for="email">Number of Copies</label>
+  </div>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="status" value="${currentStatus}">
+    <label class="mdl-textfield__label" for="email">Current Status</label>
+  </div>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="keyword" name="keywordarray[]" value="${keywordArray}">
+    <label class="mdl-textfield__label" for="email">Keyword</label>
+  </div>
+
+
+</div>
+
+    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit"style="width:330px;" id="submitupdate">
+    Update!
+  </button>
+
+
+    </form>
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="addkeyword">
+      <i class="material-icons">add</i>
+
+  </button>
+  <script>
+
+$('#submitupdate').click(function(){
+  console.log("trying to close");
+  open(location, '_self').close();
+
+})
+  </script>
+  </div>
+    </main>
+
+</body>
+</html>

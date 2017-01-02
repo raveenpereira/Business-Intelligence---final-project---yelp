@@ -1,0 +1,132 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.css">
+<script src="c3-0.4.11/c3.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+  <!-- Load d3.js and c3.js -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.js"></script>
+</script>
+
+
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" scr="helper.js"></script>
+</head>
+<style>
+#map{
+  width:400px;
+  height:400px;
+}
+</style>
+<body>
+  <div id="map"></div>
+  <div id="bussont"> <button id="drop" onclick="">Drop Markers</button></div>
+</body>
+<script>
+
+$.ajax({
+url:"more.py",
+type: "GET",
+dataType: "json",
+contentType: "application/json; charset=utf-8",
+success:function(data){
+  var markers = [];
+  var obj=data;
+  var map;
+
+var b=obj.map(function (key) {
+  console.log(key.latitude);
+  return {lat:parseFloat(key.latitude),lng: parseFloat(key.longitude)}
+
+});
+$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDFWyyv0zZga6WqEfTGB5Fwa_bQF_acQRo&libraries=visualization&callback=initMap", function(){});
+a1=localStorage.getItem('a1');
+b1=localStorage.getItem('b1');
+a2=localStorage.getItem('a2');
+b2=localStorage.getItem('b2');
+a3=localStorage.getItem('a3');
+b3=localStorage.getItem('b3');
+
+window.initMap = function() {
+
+
+     map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 1,
+      center: {lat: 35.2271, lng: -80.8431},
+      mapTypeId: 'roadmap'
+    });
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      data: getPoints(),
+      map: map,
+      radius:80
+    });
+    function getPoints() {
+      return [
+        new google.maps.LatLng(a1, b1),
+        new google.maps.LatLng(a2, b2),
+        new google.maps.LatLng(a3, b3)
+
+      ];
+    }
+    dropit();
+
+}
+
+
+
+window.dropit=function() {
+  clearMarkers();
+  for (var i = 0; i < b.length; i++) {
+    addMarkerWithTimeout(b[i], i * 1200);
+  }
+}
+
+  function addMarkerWithTimeout(position, timeout) {
+  window.setTimeout(function() {
+    console.log(position);
+    var infowindow = new google.maps.InfoWindow({
+   content: "hello"
+ });
+  var marker=  markers.push(new google.maps.Marker({
+      position: position,
+      map: map,
+      animation: google.maps.Animation.DROP
+    }));
+    google.maps.event.addListener(marker,'click', function() {
+   infowindow.open(map, marker);
+ });
+  }, timeout);
+}
+
+function clearMarkers() {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  markers = [];
+}
+
+
+
+
+console.log(b);
+
+
+
+},
+error: function(xhr, status, error) {
+//  console.log(status);
+//  console.log(error);
+}
+
+});
+
+</script>
+
+</html>

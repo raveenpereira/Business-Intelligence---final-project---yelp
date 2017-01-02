@@ -1,0 +1,623 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+  <!-- Material Design fonts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+<link rel="stylesheet" href="datepicker.min.css">
+
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script src="datepicker.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+</head>
+<style>
+.mdl-layout__content{
+	padding: 24px;
+	flex: none;
+}
+#addkeyword{
+  position: absolute;
+  margin-top: 480px;
+  margin-left: 270px;
+}
+#library1{
+  height:700px;
+  margin-top: 30px;
+}
+#searchform{
+  margin-left: 500px;
+  margin-bottom: 30px;
+}
+#searchbutton{
+  margin-left: 230px;
+
+}
+#mycart{
+  margin-left: 450px;
+  margin-bottom: 40px;
+}
+#mainform{
+  margin-left: 390px;
+}
+#updatebook{
+      margin-left: 390px;
+}
+#updatebutton{
+  margin-top: 20px;
+}
+#chooselibrarian{
+  height:300px;
+  margin-left: 300px;
+}
+#library1{
+  height:300px;
+  margin-left: 300px;
+}
+#hi{
+  margin-left: 470px;
+}
+#datepicker1{
+  position: fixed;
+  margin-left: 860px;
+  border-radius: 5px;
+  border-style: solid;
+  margin-top: 10px;
+}
+</style>
+<body>
+  <script>
+  window.keywordarray=[];
+  </script>
+  <!-- Simple header with scrollable tabs. -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">SJSU Library</span>
+      </div>
+      <!-- Tabs -->
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <a href="#scroll-tab-1" class="mdl-layout__tab is-active">ADD</a>
+        <a href="#scroll-tab-2" class="mdl-layout__tab">Update</a>
+        <a href="#scroll-tab-3" class="mdl-layout__tab">Delete</a>
+        <a href="#scroll-tab-4" class="mdl-layout__tab">Search</a>
+        <a href="#scroll-tab-5" class="mdl-layout__tab">Search By Librarian</a>
+        <a href="#scroll-tab-6" class="mdl-layout__tab" id="mycart">My Cart</a>
+
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+        <div class="page-content">
+          <input type="text" class='datepicker' name="datepicker1" id="datepicker1" />
+
+          <!--  TAB 1 ADD ............................ -->
+          <main class="mdl-layout__content" id="mainform">
+    		<div class="mdl-card mdl-shadow--6dp">
+          <form action="http://requestb.in/vo46wlvo" method="POST">
+    <div class="mdl-card__supporting-text">
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="isbn" name="ISBN">
+      <label class="mdl-textfield__label" for="isbn">ISBN</label>
+    </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="author" name="author">
+          <label class="mdl-textfield__label" for="email">Author</label>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="title" name="title">
+        <label class="mdl-textfield__label" for="password">Title</label>
+      </div>
+
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text"  id="callnumber" name="callNumber">
+      <label class="mdl-textfield__label" for="id">Call Number</label>
+
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="publisher" name="publisher">
+      <label class="mdl-textfield__label" for="email">Publisher</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="year" pattern="^[0-9]{4}$" name = "yearOfPublication">
+    <label class="mdl-textfield__label" for="year">Year of Publication</label>
+    <span class="mdl-textfield__error">Enter a valid Year</span>
+  </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="Location" name="location">
+      <label class="mdl-textfield__label" for="email">Location</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="copies" name="numberOfCopies">
+      <label class="mdl-textfield__label" for="email">Number of Copies</label>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="status" name="currentStatus">
+      <label class="mdl-textfield__label" for="email">Current Status</label>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="keyword" name="keywordarray[]">
+      <label class="mdl-textfield__label" for="email">Keyword</label>
+    </div>
+
+  <input type="file" id="inputFile2" multiple="">Book Image</input>
+
+</div>
+
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit"style="width:330px;">
+      Create
+    </button>
+
+
+      </form>
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="addkeyword">
+        <i class="material-icons">add</i>
+
+    </button>
+    <script>
+    $('#addkeyword').click(function(){
+    keywordarray.push($('#keyword').val());
+    console.log($('#keyword').val());
+    console.log(keywordarray);
+    document.getElementById("keyword").value = "";
+});
+$('#datepicker1').datepicker({
+  autoshow:true,
+  format: 'yyyy-mm-dd'
+});
+$('#datepicker1').on('change', function(){
+first = $("#datepicker1").val();
+console.log(first);
+localStorage.setItem('date',first);
+console.log(localStorage.getItem("date"));
+
+
+});
+
+    </script>
+    </div>
+      </main>
+    </div>
+
+
+
+          <!-- Your content goes here -->
+
+
+
+
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+
+
+        <div class="page-content"><!-- Your content goes here -->
+          <input type="text" class='datepicker' name="datepicker1" id="datepicker2" />
+
+          <div id="updatebook">
+
+   <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" id="table1">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Book Name</th>
+      <th>Selected</th>
+      <th>Author</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Book1</td>
+      <td>
+        <label class="mdl-radio mdl-js-radio" for="option12">
+           <input type="radio" id="option12" name="gender" class="mdl-radio__button" checked>
+
+        </label>
+
+      </td>
+      <td>John Grisham</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Harry Potter</td>
+      <td>
+        <label class="mdl-radio mdl-js-radio" for="option121">
+           <input type="radio" id="option121" name="gender" class="mdl-radio__button" >
+
+        </label>
+      </td>
+      <td>JK</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+      <td>  <label class="mdl-radio mdl-js-radio" for="option123">
+           <input type="radio" id="option123" name="gender" class="mdl-radio__button" >
+
+        </label>
+      </td>
+      <td>$2.35</td>
+    </tr>
+  </tbody>
+</table>
+<button id="updatebutton"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.href='welcomelibrarian.html';" >
+Select
+</button>
+</div>
+<script>
+
+$('#datepicker2').datepicker({
+
+  format: 'yyyy-mm-dd'
+
+});
+$('#datepicker2').on('change', function(){
+  $('#datepicker1').datepicker('setDate', localStorage.getItem("date"));
+
+first = $("#datepicker2").val();
+console.log(first);
+localStorage.setItem('date',first);
+console.log(localStorage.getItem("date"));
+$('#datepicker1').datepicker('setDate', localStorage.getItem("date"));
+$('#datepicker3').datepicker('setDate', localStorage.getItem("date"));
+$('#datepicker4').datepicker('setDate', localStorage.getItem("date"));
+$('#datepicker5').datepicker('setDate', localStorage.getItem("date"));
+
+
+});
+
+$('input[name=gender]').on('change', function() {
+  var chx1=document.getElementsByName('gender')
+//var chx = document.getElementsByTagName('input');
+for (var i=0; i<chx1.length; i++) {
+  // If you have more than one radio group, also check the name attribute
+  // for the one you want as in && chx[i].name == 'choose'
+  // Return true from the function on first match of a checked item
+  if (chx1[i].type == 'radio' && chx1[i].checked&chx1[i].name=='gender') {
+    console.log(chx1[i].id);
+  }
+}
+});
+
+</script>
+
+
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+        <div class="page-content"><!-- Your content goes here -->
+
+          <div id="deletebook">
+
+   <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" id="table2">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Book Name</th>
+      <th>Selected</th>
+      <th>Author</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Book1</td>
+      <td>
+        <label class="mdl-radio mdl-js-radio" for="delbook1">
+           <input type="radio" id="delbook1" name="deletebookname" class="mdl-radio__button" checked>
+
+        </label>
+
+      </td>
+      <td>John Grisham</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Harry Potter</td>
+      <td>
+        <label class="mdl-radio mdl-js-radio" for="delbook2">
+           <input type="radio" id="delbook2" name="deletebookname" class="mdl-radio__button" >
+
+        </label>
+      </td>
+      <td>JK</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Lord of the rings</td>
+      <td>  <label class="mdl-radio mdl-js-radio" for="delbook3">
+           <input type="radio" id="delbook3" name="deletebookname" class="mdl-radio__button" >
+
+        </label>
+      </td>
+      <td>Blah</td>
+    </tr>
+  </tbody>
+</table>
+<button id="deletebutton"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >
+Delete
+</button>
+</div>
+<script>
+$('input[name=deletebookname]').on('change', function() {
+var chx = document.getElementsByName('deletebookname');
+for (var i=0; i<chx.length; i++) {
+  // If you have more than one radio group, also check the name attribute
+  // for the one you want as in && chx[i].name == 'choose'
+  // Return true from the function on first match of a checked item
+  if (chx[i].type == 'radio' && chx[i].checked &chx[i].name=='deletebookname') {
+    console.log(chx[i].id);
+  }
+}
+});
+
+</script>
+
+
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-4">
+      <!-- Your content goes here -->
+      <div class="page-content" >
+
+
+          <form id="searchform">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+    <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+      <i class="material-icons">search</i>
+    </label>
+    <div class="mdl-textfield__expandable-holder">
+      <input class="mdl-textfield__input" type="text" id="sample6" value="">
+      <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+    </div>
+    <button id="searchbutton"onclick="searchresults();return false;"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    Search
+    </button>
+    </form>
+
+ <script>
+ function searchresults(){
+   //alert("inside searchresults");
+   //this is the text to search by
+   var keysearch=document.getElementById('sample6').value;
+   var urlstring="/book/search?search="+keysearch;
+   console.log(urlstring);
+   console.log(keysearch);
+   $.ajax({
+  url: urlstring,
+  type:GET,
+  success: function (data) {
+    //  console.log(data[0].bookId);
+  }
+
+});
+
+  main='<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" id="table4">'+
+ ' <thead><tr>  <th class="mdl-data-table__cell--non-numeric">Book Name</th><th>Selected</th>'+
+    '  <th>Author</th>  </tr>  </thead> <tbody>';
+ for(i=0;i<10;i++){
+   main+='<tr><td class="mdl-data-table__cell--non-numeric">book'+i+'</td><td>author'+i+'</td>'+
+   '<td>  <label class="mdl-radio mdl-js-radio" for="'+  i  +'">'+
+   '<input type="radio" value ="book'+i+'" name="bookselection"id="'+i+'" class="mdl-radio__button"  >'+
+   '<span class="mdl-radio__label">   </span> </label></td></tr>';
+
+ }
+ //console.log(main);
+ bookscart=[];
+ main+='</tbody></table>';
+ main+='<button id="searchbutton2" onclick="updatingbook()"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Update</button>';
+ main+='<button id="searchbutton3" onclick="deletingbook()"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Delete</button>';
+
+ document.getElementById('hi').innerHTML=main;
+
+ $('input[name=bookselection]').on('change', function() {
+ var chx = document.getElementsByName('bookselection');
+ for (var i=0; i<chx.length; i++) {
+   // If you have more than one radio group, also check the name attribute
+   // for the one you want as in && chx[i].name == 'choose'
+   // Return true from the function on first match of a checked item
+   if (chx[i].checked ) {
+     console.log(chx[i].id);
+   }
+ }
+ });
+
+
+}
+function deletingbook(){
+  console.log("yes im here to delete a book");
+  $.ajax({
+    url: 'http://requestb.in/vo46wlvo',
+    type: 'DELETE',
+    success: function(result) {
+        console.log("Deklete book success");
+        searchresults();
+    },
+    error:function (data) {
+      console.log(data);
+
+    }
+});
+
+
+    //window.location.reload()
+//$(".mdl-layout__tab:eq(5) span").click ();
+}
+function updatingbook(){
+  console.log("inside updating book");
+  myWindow = window.open("update.html", "myWindow", "width=500,height=500");
+  searchresults();
+}
+
+ </script>
+  </div>
+<div id="hi"></div>
+
+
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-5">
+        <div class="page-content" id="library1"></div><!-- Your content goes here -->
+
+<script>
+reload();
+function reload(){
+
+
+    //  alert("hi");
+      var a='<select class="ui search dropdown" id="chooselibrarian2"><option value="">Librarian</option><option value="AL">Alabama</option><option value="AK">Alaska</option> <option value="IL">Illinois</option></select>';
+console.log(a);
+     document.getElementById("library1").innerHTML = a;
+    // console.log(document.getElementById('chooselibrarian2'));
+     $('.ui.dropdown')
+       .dropdown()
+     ;
+     $('.dropdown')
+       .dropdown({
+         action: function(text, value) {
+           console.log(text);
+
+           maincontent='<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" id="table5">'+
+          ' <thead><tr>  <th class="mdl-data-table__cell--non-numeric">Book Name</th><th>Selected</th>'+
+             '  <th>Author</th>  </tr>  </thead> <tbody>';
+          for(i=0;i<10;i++){
+            maincontent+='<tr><td class="mdl-data-table__cell--non-numeric">book'+i+'</td>'+
+            '<td>  <label class="mdl-radio mdl-js-radio" for="book'+  i  +'">'+
+            '<input type="radio" name="bookselections"id="book'+i+'" class="mdl-radio__input"  >'+
+            '<span class="mdl-radio__label">   </span> </label></td><td>author'+i+'</td></tr>';
+
+          }
+          maincontent+='</tbody></table> <button onclick="reload();"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">  Back  </button>'
+          +'<button onclick=""class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">  Update  </button>'
+          +'<button onclick=""class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">  Delete  </button>';
+          console.log(maincontent);
+        //  calculatecart();
+
+          document.getElementById('library1').innerHTML=maincontent;
+          $('input[name=bookselections]').on('change', function() {
+          var chx = document.getElementsByName('bookselections');
+          for (var i=0; i<chx.length; i++) {
+            // If you have more than one radio group, also check the name attribute
+            // for the one you want as in && chx[i].name == 'choose'
+            // Return true from the function on first match of a checked item
+            if (chx[i].checked ) {
+              console.log(chx[i].id);
+            }
+          }
+          });
+
+         }
+       })
+     ;
+
+
+}
+</script>
+
+
+
+      </section>
+      <section class="mdl-layout__tab-panel" id="scroll-tab-6">
+        <div class="page-content" id="carttab"><!-- Your content goes here -->
+          <h2> My Cart</h2>
+          <script>
+        //  var data = sessionStorage.getItem('books');
+        window.calculatecart=function(){
+          var data = JSON.parse(sessionStorage.books);
+
+          console.log(Object.keys(data).length);
+          if(Object.keys(data).length!=0){
+          var maincontent='<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" id="table5">'+
+         ' <thead><tr>  <th class="mdl-data-table__cell--non-numeric">Book Name</th><th>Selected</th>'+
+            '  <th>Author</th>  </tr>  </thead> <tbody>';
+         for (var key in data){
+           maincontent+='<tr><td class="mdl-data-table__cell--non-numeric">'+data[key]+'</td>'+
+           '<td>  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="'+key+'">'+
+           '<input type="checkbox" name="bookdeletioncart"id="'+key+'" class="mdl-checkbox__input"  >'+
+           '<span class="mdl-checkbox__label">   </span> </label></td><td>author'+key+'</td></tr>';
+
+         }
+         maincontent+='</tbody></table> <button id="deletingcartbutton"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="deletecart()"> Delete </button>';
+         maincontent+=' <button id="checkout"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="checkout()"> Checkout </button>';
+
+         document.getElementById('carttab').innerHTML=maincontent;
+       }else{
+         var emptycontent='<h2>Your Cart Is Empty</h2';
+                 document.getElementById('carttab').innerHTML=emptycontent;
+       }
+
+
+
+       }
+       window.deletecart=function(){
+
+       if ($('input[name=bookdeletioncart]:checked').length > 0) {
+          var del=document.getElementsByName('bookdeletioncart');
+          var bookdel={};
+           for (var i=0; i<del.length; i++) {
+             if (del[i].checked) {
+              // bookscart.push(chx1[i].value);
+              console.log(del[i]);
+                var data = JSON.parse(sessionStorage.books);
+                console.log(data);
+                delete data[del[i].id];
+                console.log("delete this"+del[i].id);
+                console.log(data);
+                sessionStorage.setItem('books', JSON.stringify(data));
+            //    sessionStorage.setItem('total',Object.keys(data).length);
+
+                calculatecart();
+
+              //    $(".mdl-layout__tab:eq(5) span").click ();
+        //      booksaved[del[i].id]=del[i].value;
+            //  sessionStorage.setItem('items', chx1.length);
+              //sessionStorage.setItem('books', JSON.stringify(booksaved));
+               //bookscart.push(chx1[i].value);
+
+             }
+           }
+
+       }
+     }
+     window.checkout=function(){
+       var data = JSON.parse(sessionStorage.books);
+       var count1=sessionStorage.getItem('total');
+       console.log(count1);
+       if(count1==null){
+         sessionStorage.setItem('total',Object.keys(data).length);
+         console.log(JSON.parse(sessionStorage.total));
+
+
+
+       }
+       else{
+       var count=JSON.parse(sessionStorage.total);
+
+       if(count+Object.keys(data).length>10){
+         alert("You can take upto 10 books a day. Please delete "+(count+Object.keys(data).length-10)+" books");
+       }
+       sessionStorage.setItem('total',Object.keys(data).length+count);
+
+       console.log(JSON.parse(sessionStorage.total));
+      // sessionStorage.clear();
+      // if(JSON.parse(sessionStorage.total)+)
+    }
+
+     }
+         </script>
+
+
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+  </script>
+</body>
+</html>

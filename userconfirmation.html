@@ -1,0 +1,44 @@
+<html>
+<head>
+  <!-- Material Design fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+</head>
+<script>
+
+/*$(function() {
+  $('#userconfirmationform').submit(function(){
+    $.post('http://requestb.in/vo46wlvo', function() {
+      window.location = 'first.html';
+    });
+    return false;
+  });
+}); */
+function submitme(){
+  var a= document.getElementById('userconfirmationform');
+  console.log(a);
+}
+</script>
+<body>
+<h3>Enter the Confirmation Code Sent to Your Email </h2>
+<form   id="userconfirmationform">
+
+
+
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+<input class="mdl-textfield__input" type="text" pattern="^[0-9]{6}$" id="concode">
+<label class="mdl-textfield__label" for="id">Confirmation Code</label>
+  <span class="mdl-textfield__error">Enter Valid Confirmation Code</span>
+</div>
+
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit" onclick="submitme()">
+Verify
+</button>
+
+
+</form>
+</body>
+</html>

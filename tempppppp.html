@@ -1,0 +1,423 @@
+"<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page session="false"%>
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- Material Design fonts -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+</head>
+<style>
+.mdl-layout__content {
+	padding: 24px;
+	flex: none;
+}
+
+#library1 {
+	height: 700px;
+	margin-top: 30px;
+}
+
+#searchform {
+	margin-left: 500px;
+	margin-bottom: 30px;
+}
+
+#searchbutton {
+	margin-left: 230px;
+}
+
+#mycart {
+	margin-left: 450px;
+	margin-bottom: 40px;
+}
+
+#mainform {
+	margin-left: 390px;
+}
+
+#updatebook {
+	margin-left: 390px;
+}
+
+#updatebutton {
+	margin-top: 20px;
+}
+
+#chooselibrarian {
+	height: 300px;
+	margin-left: 300px;
+}
+
+#library1 {
+	height: 300px;
+	margin-left: 300px;
+}
+
+#hi {
+	margin-left: 470px;
+}
+
+#table5 {
+	margin-left: 400px;
+}
+
+#buttonsdiv {
+	margin-left: 400px;
+}
+</style>
+<body>
+	<!-- Simple header with scrollable tabs. -->
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<!-- Title -->
+				<span class="mdl-layout-title">SJSU Library</span>
+			</div>
+			<!-- Tabs -->
+			<div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+				<a href="#scroll-tab-1" class="mdl-layout__tab is-active">Home</a> <a
+					href="#scroll-tab-2" class="mdl-layout__tab">Search Catalog</a> <a
+					href="#scroll-tab-6" class="mdl-layout__tab" id="mycart">My
+					Cart</a>
+			</div>
+		</header>
+
+		<main class="mdl-layout__content">
+
+		<section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+			<div class="page-content" id="summarydiv">
+			<script>
+			$(document).ready(function(){
+				$.ajax({ url: "/patron/getpatroninfo",
+				        type:"GET",
+				        success: function(data){
+				        	window.patronloggedin=data;
+				           console.log(data);
+				           var d=new Date(data[0].bookCheckouts[0].checkoutDate);
+				           console.log(new Date(data[0].bookCheckouts[0].checkoutDate).getFullYear());
+				           console.log(new Date(data[0].bookCheckouts[0].checkoutDate).getDate() + '/' + new Date(data[0].bookCheckouts[0].checkoutDate).getDate() );
+
+				          // window.loggedinpatron=data;
+				           var content='<h1>Welcome '+data[0].firstName+'</h1>';
+				           content+='<p>This is your book History</p>';
+				       	content += '<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" id="summarytable">'
+							+ ' <thead><tr>  <th>Book Name</th><th>Author</th><th>Publisher</th><th>CheckOut Date</th><th>Due Date</th><th>Selected</th>'
+							+ '    </tr>  </thead> <tbody>';
+							console.log("reaching here");
+							for (i = 0; i < data[0].bookCheckouts.length; i++) {
+							//	alert("hi");
+					//			console.log(data[i].bookCheckouts[i].checkoutBook.title);
+								content += '<tr><td class="mdl-data-table__cell--non-numeric">'
+										+ data[0].bookCheckouts[i].checkoutBook.title
+										+ '</td><td>'
+										+ data[0].bookCheckouts[i].checkoutBook.author
+										+ '</td><td>'
+										+ data[0].bookCheckouts[i].checkoutBook.publisher
+										+ '</td><td>'
+										+ (parseInt(new Date(data[0].bookCheckouts[i].checkoutDate).getMonth())+1)+'/'+new Date(data[0].bookCheckouts[i].checkoutDate).getDate()+'/'+new Date(data[0].bookCheckouts[i].checkoutDate).getFullYear()
+										+ '</td><td>'
+										+ (parseInt(new Date(data[0].bookCheckouts[i].returnDate).getMonth())+1)+'/'+new Date(data[0].bookCheckouts[i].returnDate).getDate()+'/'+new Date(data[0].bookCheckouts[i].returnDate).getFullYear()
+
+										+ '</td>';
+										content+= '<td>  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="'+  data[i].bookId  +'">'
+										+ '<input type="checkbox" value ="'+data[i].title+'" name="returnbook"id="'+data[i].bookId+'" class="mdl-checkbox__input"  >'
+										+ '<span class="mdl-checkbox__label">   </span> </label></td>'
+										+ '</tr>';
+
+							}
+							content += '</tbody></table>';
+						document.getElementById('summarydiv').innerHTML = content;
+
+				        }
+				});
+				});</script>
+				<!-- Your content goes here -->
+
+
+			</div>
+		</section>
+
+		<section class="mdl-layout__tab-panel" id="scroll-tab-2">
+			<div class="page-content">
+				<form id="searchform">
+					<div
+						class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+						<label class="mdl-button mdl-js-button mdl-button--icon"
+							for="sample6"> <i class="material-icons">search</i>
+						</label>
+						<div class="mdl-textfield__expandable-holder">
+							<input class="mdl-textfield__input" type="text" id="sample6">
+							<label class="mdl-textfield__label" for="sample-expandable">Expandable
+								Input</label>
+						</div>
+						<button id="searchbutton" onclick="searchresults();return false;"
+							class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							Search</button>
+				</form>
+				<script>
+				window.booksaved = {};
+					function searchresults() {
+						var keysearch = document.getElementById('sample6').value;
+						var urlstring = "/book/search?search=" + keysearch;
+					//	alert(urlstring);
+						console.log(keysearch);
+
+
+					//	console.log(conversiondate[0] + "a");
+					//	var currentdate = new Date(parseInt(conversiondate[0]),
+					//			parseInt(conversiondate[1]),
+					//			parseInt(conversiondate[2]));
+					//	console.log(currentdate);
+						$
+								.ajax({
+									type : "GET",
+									url : urlstring,
+									success : function(data) {
+										console.log(data);
+										window.booksdata = data;
+										main = '<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" id="table4">'
+												+ ' <thead><tr>  <th class="mdl-data-table__cell--non-numeric">Book Name</th><th>Author</th><th>Publisher</th><th>Location</th><th>Selected</th>'
+												+ '    </tr>  </thead> <tbody>';
+												//var j=0;
+										for (i = 0; i < data.length; i++) {
+
+													for (j=0; j < patronloggedin[0].bookCheckouts.length; j++){
+												//		console.log(patronloggedin[0].bookCheckouts.length);
+												//	console.log(patronloggedin[0].bookCheckouts[j].checkoutBook.bookId);
+														if(patronloggedin[0].bookCheckouts[j].checkoutBook.bookId==data[i].bookId)
+													{
+															main += '<tr><td class="mdl-data-table__cell--non-numeric">'
+																+ data[i].title
+																+ '</td><td>'
+																+ data[i].author
+																+ '</td><td>'
+																+ data[i].publisher
+																+ '</td><td>'
+																+ data[i].location
+																+ '</td>';
+													main+= '<td>  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="'+  data[i].bookId  +'">'
+													+ '<input type="checkbox" value ="'+data[i].title+'" name="bookselection"id="'+data[i].bookId+'" class="mdl-checkbox__input" disabled >'
+													+ '<span class="mdl-checkbox__label">   </span> </label></td></tr>';
+													j++;
+													break;
+													}else {
+															main += '<tr><td class="mdl-data-table__cell--non-numeric">'
+																+ data[i].title
+																+ '</td><td>'
+																+ data[i].author
+																+ '</td><td>'
+																+ data[i].publisher
+																+ '</td><td>'
+																+ data[i].location
+																+ '</td>';
+															main+= '<td>  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="'+  data[i].bookId  +'">'
+															+ '<input type="checkbox" value ="'+data[i].title+'" name="bookselection"id="'+data[i].bookId+'" class="mdl-checkbox__input" >'
+															+ '<span class="mdl-checkbox__label">   </span> </label></td></tr>';
+															break;
+
+
+														}
+													}
+
+										}
+										//console.log(main);
+										bookscart = [];
+										main += '</tbody></table>';
+										main += '<button id="searchbutton2" onclick="addingcart()"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add to Cart</button>';
+										document.getElementById('hi').innerHTML = main;
+
+
+										var limit = 5;
+										$('input[name=bookselection]')
+												.on(
+														'click',
+														function(evt) {
+															if ($('[name=bookselection]:checked').length > limit) {
+																this.checked = false;
+
+															}
+
+														});
+									}
+
+								});
+
+					}
+					function addingcart() {
+						console
+								.log($('input[name=bookselection]:checked').length);
+						if ($('input[name=bookselection]:checked').length > 0) {
+							var chx1 = document
+									.getElementsByName('bookselection');
+
+							for (var i = 0; i < chx1.length; i++) {
+								if (chx1[i].checked) {
+									// bookscart.push(chx1[i].value);
+									console.log(chx1[i]);
+									booksaved[chx1[i].id] = chx1[i].value;
+									localStorage.setItem('items', chx1.length);
+									localStorage.setItem('books', JSON
+											.stringify(booksaved));
+									bookscart.push(chx1[i].value);
+
+								}
+							}
+
+						}
+						console.log(booksaved);
+						console.log(bookscart);
+						$(".mdl-layout__tab:eq(2) span").click();
+						calculatecart();
+
+					}
+					window.calculatecart = function() {
+						var data = JSON.parse(localStorage.books);
+						console.log(data);
+						console.log(Object.keys(data).length);
+						if (Object.keys(data).length != 0) {
+
+							var maincontent = '<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" id="table5">'
+									+ ' <thead><tr>  <th class="mdl-data-table__cell--non-numeric">Book Name</th><th>Selected</th>'
+									+ '   </tr>  </thead> <tbody>';
+							for ( var key in data) {
+								maincontent += '<tr><td class="mdl-data-table__cell--non-numeric">'
+										+ data[key]
+										+ '</td>'
+										+ '<td>  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="'+key+'">'
+										+ '<input type="checkbox" name="bookdeletioncart"id="'+key+'" class="mdl-checkbox__input"  >'
+										+ '<span class="mdl-checkbox__label">   </span> </label></td></tr>';
+
+							}
+							maincontent += '</tbody></table> <div id="buttonsdiv"><button id="deletingcartbutton"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="deletecart()"> Delete </button>';
+							maincontent += ' <button id="checkout"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="checkout()"> Checkout </button></div>';
+							//console.log(maincontent);
+							document.getElementById('carttab').innerHTML = maincontent;
+						} else {
+							var emptycontent = '<h2>Your Cart Is Empty</h2';
+							document.getElementById('carttab').innerHTML = emptycontent;
+						}
+
+					}
+					window.deletecart = function() {
+
+						if ($('input[name=bookdeletioncart]:checked').length > 0) {
+							var del = document
+									.getElementsByName('bookdeletioncart');
+							var bookdel = {};
+							for (var i = 0; i < del.length; i++) {
+								if (del[i].checked) {
+									// bookscart.push(chx1[i].value);
+									console.log(del[i]);
+									var data = JSON.parse(localStorage.books);
+									console.log(data);
+									delete data[del[i].id];
+									console.log("delete this" + del[i].id);
+									console.log(data);
+									localStorage.setItem('books', JSON
+											.stringify(data));
+									//    sessionStorage.setItem('total',Object.keys(data).length);
+
+									calculatecart();
+
+									//    $(".mdl-layout__tab:eq(5) span").click ();
+									//      booksaved[del[i].id]=del[i].value;
+									//  sessionStorage.setItem('items', chx1.length);
+									//sessionStorage.setItem('books', JSON.stringify(booksaved));
+									//bookscart.push(chx1[i].value);
+
+								}
+							}
+
+						}
+					}
+					window.checkout = function() {
+						var data = JSON.parse(localStorage.books);
+						var count1 = localStorage.getItem('total');
+						console.log(count1);
+						if (count1 == null) {
+							localStorage.setItem('total',
+									Object.keys(data).length);
+							console.log(JSON.parse(localStorage.total));
+							$(".mdl-layout__tab:eq(1) span").click();
+
+						} else {
+							console.log("inside not null");
+							var count = JSON.parse(localStorage.total);
+
+							if (count + Object.keys(data).length > 10) {
+								alert("You can take upto 10 books a day. Please delete "
+										+ (count + Object.keys(data).length - 10)
+										+ " books");
+							}
+							localStorage.setItem('total',
+									Object.keys(data).length + count);
+
+							console.log(JSON.parse(localStorage.total));
+							$(".mdl-layout__tab:eq(1) span").click();
+
+							//    localStorage.clear();
+							// if(JSON.parse(sessionStorage.total)+)
+
+							var temp = [];
+							for(var i in booksaved){
+								temp.push(i);
+							}
+
+							console.log(temp);
+
+							finalizeCheckout(temp);
+						}
+					}
+
+					function finalizeCheckout(bookIds){
+						alert("FINALIZING");
+						$.ajax({
+							type : "POST",
+							url : "/book/checkout",
+							data: {"bookIds": bookIds},
+							success : function(data) {
+
+								alert("DONE DONE");
+
+							}
+						});
+					}
+
+
+
+				</script>
+
+			</div>
+			<div id="hi"></div>
+	</div>
+	</section>
+
+
+
+	<section class="mdl-layout__tab-panel" id="scroll-tab-6">
+		<div class="page-content" id="carttab">
+			<!-- Your content goes here -->
+
+
+
+		</div>
+	</section>
+	</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<html>
+<title>testing</title>
+<head>
+  <meta charset="utf-8"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.css">
+<script src="c3-0.4.11/c3.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+
+  <!-- Load d3.js and c3.js -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.js"></script>
+  <script src ="https://raw.github.com/ducksboard/gridster.js/master/dist/jquery.gridster.min.js">
+</script>
+  <script type="text/javascript" src="https://raw.github.com/ducksboard/gridster.js/master/dist/jquery.gridster.min.js"></script>
+
+  <link rel="stylesheet" href="ducksboard-gridster.js-3140374/src/jquery.gridster.css" />
+  <script type="text/javascript" src="ducksboard-gridster.js-3140374/src/jquery.coords.js" /></script>
+  <script type="text/javascript" src="ducksboard-gridster.js-3140374/src/jquery.collision.js" /></script>
+  <script type="text/javascript" src="ducksboard-gridster.js-3140374/src/jquery.draggable.js" /></script>
+  <script type="text/javascript" src="ducksboard-gridster.js-3140374/src/jquery.gridster.extras.js" /></script>
+  <script type="text/javascript" src="ducksboard-gridster.js-3140374/src/jquery.gridster.js" /></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="helper.js"></script>
+</head>
+<style>
+
+
+#autocomplete{
+  color:black;
+  border-radius: 10px;
+  margin-top: 10px;
+  width:300px;
+  font-size: 25px;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  font-family: Tahoma, Geneva, sans-serif;
+  background-color: white;
+}
+
+#autocomplete1{
+  color:black;
+  border-radius: 10px;
+  margin-top: 10px;
+  width:300px;
+  font-size: 25px;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  font-family: Tahoma, Geneva, sans-serif;
+  background-color: white;
+}
+ul.ui-menu{
+  font-family: Tahoma, Geneva, sans-serif;
+  color:black;
+  font-size: 25px;
+}
+
+ul.ui-widget.ui-widget-content{
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+}
+ul.element {
+    display: none;
+    top: 51px;
+    left: 220.733px;
+    width: 300px;
+}
+.button{
+  background-color: white;
+  color: black;
+  width:100px;
+  height:40px;
+  border-width: thin;
+  border-color: grey;
+  border-style: solid;
+}
+.button:hover{
+  opacity:0.5;
+}
+
+
+
+</style>
+<body style="background-color:white; opacity:0.8">
+  <div id="wrapper" style="margin-left:350px;margin-top:200px;">
+    <div id="textbox1">
+<label for="autocomplete" style=" font-size:30px;color:black;font-weight:normal;font-family: Tahoma, Geneva, sans-serif; margin-right:85px;">City </label>
+<input id="autocomplete" style="text-align:center;"></input>
+
+</div>
+<div id="textbox2" style="margin-top:30px;">
+
+<label for="autocomplete1" style="font-size:30px;color:black;font-weight:100;font-family: Tahoma, Geneva, sans-serif;margin-right:18px;">Category </label>
+<input id="autocomplete1" style="text-align:center;">
+</div>
+<div id="submitbutton" style="margin-top:70px;margin-left:200px;">
+  <input type="button" class="button" onclick="showdata1()" value="GO">
+
+</body>
+
+<script>
+
+function showdata1(){
+  console.log(data1.value);
+  localStorage.setItem('city',data1.value);
+  localStorage.setItem('category',data2.value);
+  location.href="index3.html";
+}
+
+
+</script>
+</html>
